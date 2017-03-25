@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Hello, World! - A-Frame</title>
+    <title>MARS</title>
     <meta name="description" content="Hello, World! - A-Frame">
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
   </head>
@@ -22,25 +22,44 @@
     </script>
     <a-scene>
         <a-assets>
-            <img id="boxTexture" src="/images/rock-texture.jpg">
-            <img id="skyTexture" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
-            <img id="groundTexture" src="/images/sand-texture.jpg">
+            <img id="boxTexture" src="https://ucarecdn.com/afa56f31-2c20-486c-acf4-943c1f248d10/">
+            <img id="skyTexture" src="https://ucarecdn.com/320357ed-cbec-4a00-944b-32363e07ceaa/">
+            <!-- <img id="groundTexture" src="https://ucarecdn.com/1326e2a9-6984-4f23-a45a-f88a188276ef/"> -->
 
         </a-assets>
-        <a-box src="#boxTexture" position="0 2 -5" rotation="0 45 0" scale="10 2 2">
-            <a-animation attribute="position" to="0 2.2 -5" 
-                        direction="alternate" dur="2000" repeat="indefinite">
-            </a-animation>
-        </a-box>
-        <a-sky src="#skyTexture" width="30" height="30"></a-sky>
-        <a-plane src="#groundTexture" rotation="-90 0 0" width="30" height="30"></a-plane>
-
-        <a-light type="ambient" color="#445451"></a-light>
-        <a-light type="point" intensity="2" position="2 4 4"></a-light>
-
-        <a-camera>
+        <a-entity position="2.87 8.10 12.91" text="welcome">
+            <a-camera>
             <a-cursor></a-cursor>
-        </a-camera>
+            </a-camera>
+        </a-entity>
+        
+        <a-entity
+            geometry="primitive: plane; width: 4; height: auto"
+            material="color: blue"
+            text="value: This text will be 4 units wide."
+            position="3.29 9.33 18.18">
+        </a-entity>
+  
+        <!-- top --> 
+        <a-box src="#boxTexture" position="3.47 14.61 2.75" rotation="0 0 0" scale="10 1 30"></a-box>
+        <!-- side1 --> 
+        <a-box src="#boxTexture" position="-1.46 9.13 2.75" rotation="0 0 0" scale="1 10 30"></a-box>
+        <!-- side2 --> 
+        <a-box src="#boxTexture" position="8.91 9.45 2.75" rotation="0 0 0" scale="1 10 30"></a-box>
+        <!-- back --> 
+        <a-box src="#boxTexture" position="3.76 9.20 -12.05" rotation="0 0 0" scale="10 10 1"></a-box>
+        <!-- front --> 
+        <a-box src="#boxTexture" position="3.29 9.33 17.18" rotation="0 0 0" scale="10 10 1"></a-box>
+
+
+        <!--
+        <a-light type="ambient" color="#445451"></a-light>
+        <a-light type="point" intensity="1" position="2 4 4"></a-light>
+        
+        
+        -->
+        <a-sky color="fff"></a-sky>
+        <a-plane rotation="-90 0 0" color="#333" width="80" height="80"></a-plane>
     </a-scene>
 
   </body>
