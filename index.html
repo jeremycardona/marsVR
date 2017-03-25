@@ -33,13 +33,7 @@
             </a-camera>
         </a-entity>
         
-        <a-entity
-            geometry="primitive: plane; width: 4; height: auto"
-            material="color: blue"
-            text="value: This text will be 4 units wide."
-            position="3.29 9.33 18.18">
-        </a-entity>
-  
+        <a-text value="You are an astronaut in MARS. Your mission is to find water before dawn, you have 1 hour remaining." color="black" position="1.46 10.13 10.75" height="30"></a-text>
         <!-- top --> 
         <a-box src="#boxTexture" position="3.47 14.61 2.75" rotation="0 0 0" scale="10 1 30"></a-box>
         <!-- side1 --> 
@@ -59,7 +53,7 @@
         
         -->
         <a-sky color="fff"></a-sky>
-        <a-plane rotation="-90 0 0" color="#333" width="80" height="80"></a-plane>
+        <a-plane rotation="-90 0 0" src="#boxTexture" width="80" height="80"></a-plane>
     </a-scene>
 
   </body>
