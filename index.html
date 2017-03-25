@@ -8,29 +8,50 @@
   </head>
   <body>
     <script>
-        AFRAME.registerComponent('scale-on-mouseenter', {
-            schema: {
-            to: {default: '2.5 2.5 2.5'}
-            },
-            init: function () {
-            var data = this.data;
-            this.el.addEventListener('mouseenter', function () {
-                this.setAttribute('scale', data.to);
-            });
-            }
-        });
+        
+        AFRAME.registerComponent('move-on-mouseenter', {
+    schema: {
+      to: {default: '2.5 2.5 2.5'},
+      scale: {default: '0 0 0'},
+      animation: {default: 'position'}
+    },
+    init: function () {
+      var data = this.data;
+      var frontDoor = document.getElementById('front');
+       var cam = document.querySelector('a-entity');
+       var anima = document.querySelector('a-animation');
+      this.el.addEventListener('mouseenter', function () {
+        cam.setAttribute('position', data.to);
+        frontDoor.setAttribute('scale', data.scale)
+        anima.setAttribute('attribute', data.animation)
+      });
+    }
+  });
     </script>
     <a-scene>
         <a-assets>
             <img id="boxTexture" src="https://ucarecdn.com/afa56f31-2c20-486c-acf4-943c1f248d10/">
-            <img id="skyTexture" src="https://ucarecdn.com/320357ed-cbec-4a00-944b-32363e07ceaa/">
+            <img id="skyTexture" src="https://ucarecdn.com/1326e2a9-6984-4f23-a45a-f88a188276ef/">
+            <img id="computer" src="https://ucarecdn.com/218155ba-475a-4eed-a05c-f943b5fee3c8/">
             <!-- <img id="groundTexture" src="https://ucarecdn.com/1326e2a9-6984-4f23-a45a-f88a188276ef/"> -->
 
         </a-assets>
         <a-entity position="2.87 8.10 12.91" text="welcome">
             <a-camera>
+               
             <a-cursor></a-cursor>
             </a-camera>
+            <a-animation
+               attribute="none"
+               dur="2000"
+               fill="none"
+               to="6.29 9.33 -9"
+               repeat="0"
+               from="2.87 8.10 12.91"
+               begin="0">
+            </a-animation>
+
+               
         </a-entity>
         
         <a-text value="You are an astronaut in MARS. Your mission is to find water before dawn, you have 1 hour remaining." color="black" position="1.46 10.13 10.75" height="30"></a-text>
@@ -43,7 +64,12 @@
         <!-- back --> 
         <a-box src="#boxTexture" position="3.76 9.20 -12.05" rotation="0 0 0" scale="10 10 1"></a-box>
         <!-- front --> 
-        <a-box src="#boxTexture" position="3.29 9.33 17.18" rotation="0 0 0" scale="10 10 1"></a-box>
+        <a-box id="front" src="#boxTexture" position="3.29 9.33 17.18" rotation="0 0 0" scale="10 10 1"></a-box>
+
+        <!-- computer -->
+        <a-box src="#computer" position="6.29 9.33 -11" rotation="0 0 0" scale="4 4 2"  move-on-mouseenter="to: 6.29 9.33 -7.5"></a-box>
+         <a-text value="CONTROL DRONE" color="black" position="2.29 6.33 -11" width="16" ></a-text>
+       
 
 
         <!--
@@ -52,7 +78,7 @@
         
         
         -->
-        <a-sky color="fff"></a-sky>
+        <a-sky color="#CE7A2B"></a-sky>
         <a-plane rotation="-90 0 0" src="#boxTexture" width="80" height="80"></a-plane>
     </a-scene>
 
