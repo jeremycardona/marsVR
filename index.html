@@ -9,7 +9,7 @@
   <body>
     <script>
         
-        AFRAME.registerComponent('move-on-mouseenter', {
+    AFRAME.registerComponent('move-on-mouseenter', {
     schema: {
       to: {default: '2.5 2.5 2.5'},
       scale: {default: '0 0 0'},
@@ -18,12 +18,33 @@
     init: function () {
       var data = this.data;
       var frontDoor = document.getElementById('front');
-       var cam = document.querySelector('a-entity');
-       var anima = document.querySelector('a-animation');
+       var cam = document.getElementById('start');
+       var anima = document.getElementById('moves');
       this.el.addEventListener('mouseenter', function () {
         cam.setAttribute('position', data.to);
         frontDoor.setAttribute('scale', data.scale)
         anima.setAttribute('attribute', data.animation)
+      });
+    }
+  });
+
+  AFRAME.registerComponent('bb8-on-mouseenter', {
+    schema: {
+      to: {default: ''},
+      droidPos: {default: '3.29 4.03 47.04'},
+      animation: {default: 'position'}
+    },
+    init: function () {
+        var data = this.data;
+        var cam = document.getElementById('second');
+        var secondCam = document.querySelector('#secondCam');
+        var droid = document.getElementById('droid');
+        var anim = document.querySelector('#bb8Anim');
+      this.el.addEventListener('mouseenter', function () {
+
+        secondCam.setAttribute('camera', 'active', true);
+        cam.setAttribute('position', data.to);
+        anim.setAttribute('attribute', data.animation);
       });
     }
   });
@@ -33,26 +54,29 @@
             <img id="boxTexture" src="https://ucarecdn.com/afa56f31-2c20-486c-acf4-943c1f248d10/">
             <img id="skyTexture" src="https://ucarecdn.com/1326e2a9-6984-4f23-a45a-f88a188276ef/">
             <img id="computer" src="https://ucarecdn.com/218155ba-475a-4eed-a05c-f943b5fee3c8/">
-            <!-- <img id="groundTexture" src="https://ucarecdn.com/1326e2a9-6984-4f23-a45a-f88a188276ef/"> -->
-
+            <img id="groundTexture" src="https://ucarecdn.com/1326e2a9-6984-4f23-a45a-f88a188276ef/">
+            <img id="bb8" src="https://ucarecdn.com/e1a7acb8-2b53-417b-8942-0846eb32403b/" >
         </a-assets>
-        <a-entity position="2.87 8.10 12.91" text="welcome">
+
+         
+
+        <a-entity id="start" position="2.87 8.10 12.91" >
             <a-camera>
-               
             <a-cursor></a-cursor>
             </a-camera>
-            <a-animation
+            <a-animation 
+               id="moves"
                attribute="none"
-               dur="2000"
+               dur="5000"
                fill="none"
                to="6.29 9.33 -9"
                repeat="0"
                from="2.87 8.10 12.91"
                begin="0">
             </a-animation>
-
-               
+              
         </a-entity>
+
         
         <a-text value="You are an astronaut in MARS. Your mission is to find water before dawn, you have 1 hour remaining." color="black" position="1.46 10.13 10.75" height="30"></a-text>
         <!-- top --> 
@@ -69,8 +93,36 @@
         <!-- computer -->
         <a-box src="#computer" position="6.29 9.33 -11" rotation="0 0 0" scale="4 4 2"  move-on-mouseenter="to: 6.29 9.33 -7.5"></a-box>
          <a-text value="CONTROL DRONE" color="black" position="2.29 6.33 -11" width="16" ></a-text>
-       
+         
+        <!-- droid -->
+         <a-entity id="second"  bb8-on-mouseenter="to: 10.66 4.03 20.63">
+             <a-box id="droid" position="1.66 6.34 18.63" src="#bb8"  rotation="10 0 0" scale="2 2 2" > </a-box>
+             <a-camera id='secondCam' active="false">
+                 <a-cursor></a-cursor>
+                 <a-animation 
+               id="bb8Anim"
+               attribute="none"
+               dur="5000"
+               fill="none"
+               begin="0"
+               to="3.29 9.33 47.04"
+               repeat="0"
+               from="1.66 6.34 18.63"
+               >
+            </a-animation>
+             </a-camera>
+             
+             
+         </a-entity>
 
+         <!-- cave -->
+         <a-entity>
+             <a-box src="#groundTexture" position="19.70 5.98 -18.12 " scale="0.06 5.00 9"> </a-box>
+             <a-box src="#groundTexture" position="26 6.09 -18.12 " scale="0.06 5.00 9"> </a-box>
+             <a-box src="#groundTexture" position="22.88 5.98 -22.12 " scale="0.06 5.00 9" rotation=" 0 90 0"> </a-box>
+             
+         </a-entity>
+        
 
         <!--
         <a-light type="ambient" color="#445451"></a-light>
@@ -79,7 +131,7 @@
         
         -->
         <a-sky color="#CE7A2B"></a-sky>
-        <a-plane rotation="-90 0 0" src="#boxTexture" width="80" height="80"></a-plane>
+        <a-plane rotation="-90 0 0" position="0 4.03 15.63" src="#boxTexture" width="80" height="80"></a-plane>
     </a-scene>
 
   </body>
